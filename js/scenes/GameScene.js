@@ -3,11 +3,21 @@ class GameScene extends Phaser.Scene {
         super("Game");
     }
 
-    init() {
-
+    create() {
+        // Create the in game map
+        this.createMap();
     }
 
-    create() {
-
+    // Method creates the game map using the GameMap class defined in ../classes/GameMap.js
+    createMap() {
+        this.map = new GameMap(
+            this,
+            "map",
+            "terrain_atlas",
+            "Ground",
+            "Blocked",
+            "Deco1",
+            "Deco2"
+        );
     }
 }
