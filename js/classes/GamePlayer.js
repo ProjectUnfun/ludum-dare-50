@@ -20,6 +20,9 @@ class GamePlayer extends Phaser.Physics.Arcade.Sprite {
         // Config combat
         this.configCombat();
 
+        // Create health bar
+        this.createHealthBar();
+
         // Make the game camera follow the player
         this.scene.cameras.main.startFollow(this);
 
@@ -31,6 +34,7 @@ class GamePlayer extends Phaser.Physics.Arcade.Sprite {
         this.checkIdle(cursors);
         this.checkMovement(cursors);
         this.checkAttack(cursors);
+        this.updateHealthBar();
 
         // Handle physics body repositioning due to larger attack sprite frame size
         if (this.isAttacking) {
@@ -49,10 +53,6 @@ class GamePlayer extends Phaser.Physics.Arcade.Sprite {
         // Config health
         this.health = 12;
         this.maxHealth = 12;
-
-        // Config energy
-        this.energy = 12;
-        this.maxEnergy = 12;
 
         // Config attack value
         this.attackValue = 3;
@@ -80,18 +80,18 @@ class GamePlayer extends Phaser.Physics.Arcade.Sprite {
         this.makeHitboxInactive();
         this.hitboxIsActive = false;
 
-        // Player hitbox vs monsters overlap method call
-        // this.scene.physics.add.overlap(this.hitbox, this.scene.monsters, this.handleEnemyAttacked, undefined, this);
+        // Player hitbox vs Romans overlap method call
+        this.scene.physics.add.overlap(this.hitbox, this.scene.romans, this.handleRomanAttacked, undefined, this);
     }
 
-    // Method handles player attack hiting monster
-    // handleEnemyAttacked(hitbox, enemy) {
-    //     enemy.updateHealth(this.attackValue);
-    // }
+    // Method handles player attack hiting romans
+    handleRomanAttacked(hitbox, roman) {
+        roman.updateHealth(this.attackValue);
+    }
 
     // Method handles hitbox location assignment
     checkAttack(cursors) {
-        if (Phaser.Input.Keyboard.JustDown(cursors.space) && !this.isAttacking && this.energy > 0) {
+        if (Phaser.Input.Keyboard.JustDown(cursors.space) && !this.isAttacking) {
             // Stop animations and movement, alter attacking flag
             this.anims.stop();
             this.body.setVelocity(0);
@@ -122,9 +122,6 @@ class GamePlayer extends Phaser.Physics.Arcade.Sprite {
             // Activate hitbox for attack detection
             this.makeHitboxActive();
 
-            // Deplete player energy for each attack
-            // this.energy--;
-
             // Delay player attack repetition by .3 seconds
             this.scene.time.delayedCall(
                 300,
@@ -140,6 +137,22 @@ class GamePlayer extends Phaser.Physics.Arcade.Sprite {
                 this.makeHitboxInactive();
             }
         }
+    }
+
+    // Method make hitbox active for attack overlap checking
+    makeHitboxActive() {
+        // Activate hitbox overlap checking
+        this.hitbox.setActive(true);
+        this.hitbox.body.checkCollision.none = false;
+        this.hitboxIsActive = true;
+    }
+
+    // Method makes hitbox inactive to prevent attack overlap checking
+    makeHitboxInactive() {
+        // Deactivate hitbox overlap checking
+        this.hitbox.setActive(false);
+        this.hitbox.body.checkCollision.none = true;
+        this.hitboxIsActive = false;
     }
 
     // Method handles idle status
@@ -201,20 +214,31 @@ class GamePlayer extends Phaser.Physics.Arcade.Sprite {
         }
     }
 
-    // Method make hitbox active for attack overlap checking
-    makeHitboxActive() {
-        // Activate hitbox overlap checking
-        this.hitbox.setActive(true);
-        this.hitbox.body.checkCollision.none = false;
-        this.hitboxIsActive = true;
+    // Method handles updating health when damage is taken
+    updateHealth(amount) {
+        this.health -= amount;
+        if (this.health < 0) this.health = 0;
+        console.log(`Player has been damaged`);
     }
 
-    // Method makes hitbox inactive to prevent attack overlap checking
-    makeHitboxInactive() {
-        // Deactivate hitbox overlap checking
-        this.hitbox.setActive(false);
-        this.hitbox.body.checkCollision.none = true;
-        this.hitboxIsActive = false;
+    // Method creates the health bar
+    createHealthBar() {
+        this.healthBar = this.scene.add.graphics();
+        this.updateHealthBar();
+    }
+
+    // Method updates the location and fullness of health bar
+    updateHealthBar() {
+        this.healthBar.clear();
+        this.healthBar.fillStyle(0xffffff, 1);
+        this.healthBar.fillRect(this.x - 20, this.y - 30, 40, 5);
+        this.healthBar.fillGradientStyle(0x00ff00, 0x00ff00, 4);
+        this.healthBar.fillRect(
+            this.x - 20,
+            this.y - 30,
+            (40 * this.health) / this.maxHealth,
+            5
+        );
     }
 
     // Method generatesd frames for walking animations

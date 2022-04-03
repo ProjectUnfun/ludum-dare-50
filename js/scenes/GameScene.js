@@ -55,11 +55,11 @@ class GameScene extends Phaser.Scene {
         // Create the in game map
         this.createMap();
 
-        // Create the player
-        this.createPlayer();
-
         // Config the enemies
         this.configRomans();
+
+        // Create the player
+        this.createPlayer();
 
         // Spawn the first wave of enemies
         this.spawnRomans(this.numberOfRomans);
@@ -165,12 +165,16 @@ class GameScene extends Phaser.Scene {
 
     // Method creates collisions between map vs creatures & creatures vs creatures
     addCollisions() {
-        // Player vs map blocked layer
+        // Player vs map blocked layer & edges
         this.physics.add.collider(this.player, this.map.blockedLayer);
+        this.player.setCollideWorldBounds(true);
 
         // Romans vs map blocked layer
         this.physics.add.collider(this.romans, this.map.blockedLayer);
 
-        this.player.setCollideWorldBounds(true);
+        // Romans attacking player overlap event
+        this.physics.add.overlap(this.player, this.romans, (player, roman) => {
+            roman.markAsAttacking();
+        });
     }
 }
