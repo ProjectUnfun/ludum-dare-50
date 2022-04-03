@@ -32,6 +32,7 @@ class GamePlayer extends Phaser.Physics.Arcade.Sprite {
         this.checkMovement(cursors);
         this.checkAttack(cursors);
 
+        // Handle physics body repositioning due to larger attack sprite frame size
         if (this.isAttacking) {
             this.body.setOffset(80, 94);
         } else {

@@ -31,6 +31,26 @@ class BootScene extends Phaser.Scene {
             frameWidth: 192,
             frameHeight: 192,
         });
+
+        // Basic Roman soldier sprites
+        this.load.spritesheet("basicWalk", "assets/images/roman/basicWalk.png", {
+            frameWidth: 64,
+            frameHeight: 64,
+        });
+        this.load.spritesheet("basicAttack", "assets/images/roman/basicAttack.png", {
+            frameWidth: 64,
+            frameHeight: 64,
+        });
+
+        // Roman commander sprites
+        this.load.spritesheet("commanderWalk", "assets/images/roman/commanderWalk.png", {
+            frameWidth: 64,
+            frameHeight: 64,
+        });
+        this.load.spritesheet("commanderAttack", "assets/images/roman/commanderAttack.png", {
+            frameWidth: 64,
+            frameHeight: 64,
+        });
     }
 
     // Load the images
