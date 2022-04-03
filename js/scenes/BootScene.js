@@ -60,6 +60,15 @@ class BootScene extends Phaser.Scene {
     loadImages() {
         // Fighter class hitbox (never seen, just used for physics body)
         this.load.image("playerHitbox", "assets/images/player/hitboxImage.png");
+
+        // Title screen background image
+        this.load.image("titleBG", "assets/images/backgrounds/TitleBG.png");
+
+        // Tutorial scene background image
+        this.load.image("tutorialBG", "assets/images/backgrounds/TutorialBG.png");
+
+        // Game over scene background image
+        this.load.image("endBG", "assets/images/backgrounds/EndBG.png");
     }
 
     // Method loads in the game audio
@@ -86,6 +95,6 @@ class BootScene extends Phaser.Scene {
 
     // Start the next scene
     create() {
-        this.scene.start("Game");
+        this.scene.start("Title");
     }
 }

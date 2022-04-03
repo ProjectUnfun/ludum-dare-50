@@ -1,0 +1,54 @@
+Authors: Stephen Challener (Redshrike), Johannes Sjölund (wulax), Matthew Krohn (makrohn), bluecarrot16, DCSS authors, Michael Whitlock (bigbeargames), David Conway Jr. (JaidynReiman), Joe White, Nila122, Benjamin K. Smith (BenCreating), Sander Frenken (castelonia)
+
+- body/male/human/peach.png: by Stephen Challener (Redshrike), Johannes Sjölund (wulax). License(s): CC-BY-SA 3.0, GPL 3.0. 
+    - https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles
+    - https://opengameart.org/content/lpc-medieval-fantasy-character-sprites
+
+- eyes/male/green.png: by Matthew Krohn (makrohn), Stephen Challener (Redshrike). License(s): CC-BY-SA 3.0, GPL 3.0. 
+    - https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles
+
+- beards/winter/male/dark_brown.png: by bluecarrot16. License(s): CC0. 
+    - https://opengameart.org/content/lpc-santa
+
+- hat/helmet/barbarian/male/iron.png: by bluecarrot16. License(s): CC-BY 3.0, CC-BY 4.0, OGA-BY 3.0, GPL 2.0, GPL 3.0. 
+    - https://opengameart.org/content/lpc-helmets
+
+- hat/accessory/wings/fg/male/steel.png: by bluecarrot16, DCSS authors. License(s): CC0. 
+    - http://opengameart.org/content/dungeon-crawl-32x32-tiles
+    - https://opengameart.org/content/cc0-headgear-icons
+    - https://opengameart.org/content/lpc-helmets-mega-pack
+
+- hat/accessory/wings/bg/male/steel.png: by bluecarrot16, DCSS authors. License(s): CC0. 
+    - http://opengameart.org/content/dungeon-crawl-32x32-tiles
+    - https://opengameart.org/content/cc0-headgear-icons
+    - https://opengameart.org/content/lpc-helmets-mega-pack
+
+- bracers/male/1.png: by Johannes Sjölund (wulax). License(s): CC-BY-SA 3.0, GPL 3.0. 
+    - https://opengameart.org/content/lpc-medieval-fantasy-character-sprites
+
+- gloves/male/2.png: by Michael Whitlock (bigbeargames), Matthew Krohn (makrohn), Johannes Sjölund (wulax). License(s): CC-BY-SA 3.0, GPL 3.0. 
+    - https://opengameart.org/content/lpc-medieval-fantasy-character-sprites
+
+- cape/solid/male/brown.png: by David Conway Jr. (JaidynReiman). License(s): CC-BY-SA 3.0, GPL 3.0. 
+    - https://opengameart.org/content/lpc-curly-hair-elven-ears-white-cape-with-blue-trim-and-more
+
+- cape/solid_behind/brown.png: by David Conway Jr. (JaidynReiman). License(s): CC-BY-SA 3.0, GPL 3.0. 
+    - https://opengameart.org/content/lpc-curly-hair-elven-ears-white-cape-with-blue-trim-and-more
+
+- torso/waist/belt_leather/male/brown.png: by bluecarrot16, Johannes Sjölund (wulax), Matthew Krohn (makrohn). License(s): CC-BY-SA 3.0, GPL 3.0. 
+    - https://opengameart.org/content/lpc-combat-armor-for-women
+    - https://opengameart.org/content/lpc-pirates
+
+- legs/pants/male/brown.png: by bluecarrot16, David Conway Jr. (JaidynReiman), Joe White, Matthew Krohn (makrohn), Johannes Sjölund (wulax). License(s): CC-BY-SA 3.0, GPL 3.0. 
+    - https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles
+    - https://opengameart.org/content/lpc-medieval-fantasy-character-sprites
+
+- feet/boots/male/brown.png: by bluecarrot16, Nila122, Johannes Sjölund (wulax), Stephen Challener (Redshrike). License(s): CC-BY-SA 3.0, GPL 2.0, GPL 3.0. 
+    - https://opengameart.org/content/lpc-clothes-and-hair
+    - https://opengameart.org/content/lpc-santa
+
+- weapon/slash_oversize/male/universal/waraxe.png: by Benjamin K. Smith (BenCreating), Sander Frenken (castelonia). License(s): CC-BY-SA 3.0, GPL 3.0. 
+    - https://opengameart.org/content/lpc-medieval-weapons
+
+- weapon/slash_oversize/male/waraxe.png: by Benjamin K. Smith (BenCreating), Sander Frenken (castelonia). License(s): CC-BY-SA 3.0, GPL 3.0. 
+    - https://opengameart.org/content/lpc-medieval-weapons

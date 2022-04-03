@@ -13,10 +13,10 @@ const RomanTypes = {
 }
 
 // Track movement velocity of player in game (original speed = 180)
-const playerMoveSpeed = 380;
+const playerMoveSpeed = 200;
 
 // Track movement velocity of monsters in game
-const romanMoveSpeed = 180;
+const romanMoveSpeed = 170;
 
 // Track the ID of monsters
 let romanID = 0;
@@ -72,6 +72,11 @@ class GameScene extends Phaser.Scene {
     }
 
     update() {
+        // Check player death
+        if (this.player.health < 1) {
+            this.scene.start("End", { killCount: this.player.killCount, timeAlive: this.player.timeAlive });
+        }
+
         // Call the player object update method
         this.player.update(this.cursors);
 
@@ -204,7 +209,7 @@ class GameScene extends Phaser.Scene {
         });
         this.commanderGruntAudio = this.sound.add("commanderGrunt", {
             loop: false,
-            volume: 2.3,
+            volume: 3.3,
         });
         this.commanderAttackAudio = this.sound.add("commanderAttack", {
             loop: false,

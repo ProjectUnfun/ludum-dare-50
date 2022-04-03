@@ -5,6 +5,9 @@ var config = {
     parent: "game-div",
     scene: [
         BootScene,
+        TitleScene,
+        TutorialScene,
+        EndScene,
         GameScene,
     ],
     dom: {

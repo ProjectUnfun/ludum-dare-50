@@ -153,12 +153,16 @@ class Roman extends Phaser.Physics.Arcade.Sprite {
 
     // Method configs combat
     configCombat() {
-        // Config health
-        this.health = 8;
-        this.maxHealth = 8;
-
-        // Config attack value
-        this.attackValue = 1;
+        if (this.type === RomanTypes.BASIC) {
+            this.health = 6;
+            this.maxHealth = 6;
+            this.attackValue = 1;
+        }
+        else if (this.type === RomanTypes.COMMANDER) {
+            this.health = 12;
+            this.maxHealth = 12;
+            this.attackValue = 2;
+        }
 
         // Track attack status
         this.isAttacking = false;
@@ -250,9 +254,20 @@ class Roman extends Phaser.Physics.Arcade.Sprite {
             // Decrement Roman counter
             this.scene.numberOfRomans--;
 
-            // Play death audio
-            if (this.type === RomanTypes.BASIC) this.scene.basicDeathAudio.play();
-            else if (this.type === RomanTypes.COMMANDER) this.scene.commanderDeathAudio.play();
+            // Increment player kill counter
+            this.scene.player.killCount++;
+
+            // Play death audio & recover player health
+            if (this.type === RomanTypes.BASIC) {
+                this.scene.basicDeathAudio.play();
+                this.scene.player.health += 1;
+                if (this.scene.player.health > this.scene.player.maxHealth) this.scene.player.health = this.scene.player.maxHealth;
+            }
+            else if (this.type === RomanTypes.COMMANDER) {
+                this.scene.commanderDeathAudio.play();
+                this.scene.player.health += 3;
+                if (this.scene.player.health > this.scene.player.maxHealth) this.scene.player.health = this.scene.player.maxHealth;
+            }
 
             // Set the monster to inactive
             this.makeInactive();

@@ -28,6 +28,9 @@ class GamePlayer extends Phaser.Physics.Arcade.Sprite {
 
         // Add player object to scene
         this.scene.add.existing(this);
+
+        // TEMP CODE Until timer is implemented
+        this.timeAlive = 90;
     }
 
     update(cursors) {
@@ -51,8 +54,8 @@ class GamePlayer extends Phaser.Physics.Arcade.Sprite {
         this.body.setOffset(16, 30);
 
         // Config health
-        this.health = 12;
-        this.maxHealth = 12;
+        this.health = 15;
+        this.maxHealth = 15;
 
         // Config attack value
         this.attackValue = 3;
@@ -62,6 +65,9 @@ class GamePlayer extends Phaser.Physics.Arcade.Sprite {
 
         // Track damage receiving status
         this.canBeAttacked = true;
+
+        // Track number of Romans killed
+        this.killCount = 0;
 
         // Track hitbox location
         this.hitboxLocation = {
