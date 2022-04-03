@@ -105,19 +105,22 @@ class GamePlayer extends Phaser.Physics.Arcade.Sprite {
             } else if (this.currentDirection === Direction.UP) {
                 this.anims.play("attackUp", true);
                 this.hitboxLocation.x = this.x;
-                this.hitboxLocation.y = this.y - 16;
+                this.hitboxLocation.y = this.y - 8;
             } else if (this.currentDirection === Direction.LEFT) {
                 this.anims.play("attackLeft", true);
-                this.hitboxLocation.x = this.x - 24;
+                this.hitboxLocation.x = this.x - 16;
                 this.hitboxLocation.y = this.y + 6;
             } else if (this.currentDirection === Direction.RIGHT) {
                 this.anims.play("attackRight", true);
-                this.hitboxLocation.x = this.x + 24;
+                this.hitboxLocation.x = this.x + 16;
                 this.hitboxLocation.y = this.y + 6;
             }
 
             // Update location of hitbox
             this.hitbox.setPosition(this.hitboxLocation.x, this.hitboxLocation.y);
+
+            // Play attack audio
+            this.scene.playerAttackAudio.play();
 
             // Activate hitbox for attack detection
             this.makeHitboxActive();
@@ -218,6 +221,11 @@ class GamePlayer extends Phaser.Physics.Arcade.Sprite {
     updateHealth(amount) {
         this.health -= amount;
         if (this.health < 0) this.health = 0;
+
+        // Play hit audio
+        this.scene.playerGruntAudio.play();
+        this.scene.playerHitAudio.play();
+
         console.log(`Player has been damaged`);
     }
 

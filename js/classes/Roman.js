@@ -35,6 +35,7 @@ class Roman extends Phaser.Physics.Arcade.Sprite {
     }
 
     update() {
+        this.checkDeath();
         this.checkMovement();
         this.checkAttack();
         this.updateHealthBar();
@@ -161,6 +162,9 @@ class Roman extends Phaser.Physics.Arcade.Sprite {
 
         // Track attack status
         this.isAttacking = false;
+
+        // Track attack audio status
+        this.attackAudioPlayed = false;
     }
 
     // Method alters attacking flag
@@ -171,16 +175,40 @@ class Roman extends Phaser.Physics.Arcade.Sprite {
     // Method handles Romans attacking player
     checkAttack() {
         if (this.isAttacking) {
+            // Stop Roman movement if attacking
             this.body.setVelocity(0);
 
+            // Determine which direction to face based on relative position of player
+            let xDiff = this.x - this.scene.player.x;
+            let yDiff = this.y - this.scene.player.y;
+            if (Math.abs(xDiff) > Math.abs(yDiff)) {
+                if (this.x > this.scene.player.x) this.currentDirection = Direction.LEFT;
+                else this.currentDirection = Direction.RIGHT;
+            }
+            else {
+                if (this.y > this.scene.player.y) this.currentDirection = Direction.UP;
+                else this.currentDirection = Direction.DOWN;
+            }
+
+            // Play attack animation according to facing direction
             if (this.currentDirection === Direction.DOWN) {
                 this.anims.play("attackDown", true);
-            } else if (this.currentDirection === Direction.UP) {
+            }
+            else if (this.currentDirection === Direction.UP) {
                 this.anims.play("attackUp", true);
-            } else if (this.currentDirection === Direction.LEFT) {
+            }
+            else if (this.currentDirection === Direction.LEFT) {
                 this.anims.play("attackLeft", true);
-            } else if (this.currentDirection === Direction.RIGHT) {
+            }
+            else if (this.currentDirection === Direction.RIGHT) {
                 this.anims.play("attackRight", true);
+            }
+
+            // Handle attack audio playing
+            if (this.attackAudioPlayed === false) {
+                if (this.type === RomanTypes.BASIC) this.scene.basicAttackAudio.play();
+                else if (this.type === RomanTypes.COMMANDER) this.scene.commanderAttackAudio.play();
+                this.attackAudioPlayed = true;
             }
 
             // If the player can be attacked
@@ -190,35 +218,86 @@ class Roman extends Phaser.Physics.Arcade.Sprite {
 
                 // Delayed call to make player attackable again
                 this.scene.time.delayedCall(
-                    700,
+                    500,
                     () => {
                         this.scene.player.canBeAttacked = true;
+                        this.isAttacking = false;
+                        this.attackAudioPlayed = false;
                     },
                     [],
                     this
                 );
             }
-
-            // Delay Roman attack repetition by .3 seconds
-            this.scene.time.delayedCall(
-                300,
-                () => {
-                    // Reset flag & deactivate hitbox
-                    this.isAttacking = false;
-                },
-                [],
-                this
-            );
         }
     }
 
     // Method handles updating health when damage is taken
     updateHealth(amount) {
         this.health -= amount;
+        if (this.health < 0) this.health = 0;
+
+        // Play hit audio
+        if (this.type === RomanTypes.BASIC) this.scene.basicGruntAudio.play();
+        else if (this.type === RomanTypes.COMMANDER) this.scene.commanderGruntAudio.play();
+        this.scene.enemyHitAudio.play();
+
         console.log(`Enemy: ${this.id} has been damaged`);
     }
 
-    // Method creates the monster health bar
+    // Method handles death
+    checkDeath() {
+        if (this.health <= 0) {
+            // Decrement Roman counter
+            this.scene.numberOfRomans--;
+
+            // Play death audio
+            if (this.type === RomanTypes.BASIC) this.scene.basicDeathAudio.play();
+            else if (this.type === RomanTypes.COMMANDER) this.scene.commanderDeathAudio.play();
+
+            // Set the monster to inactive
+            this.makeInactive();
+        }
+    }
+
+    // Method prepares Roman for reactivation
+    makeActive(locationArray) {
+        // Reconfig animations & facing direction
+        this.anims.stop();
+        this.anims.play("walkDown", true);
+        this.setFrame(18);
+        this.currentDirection = Direction.DOWN;
+
+        // Reset health;
+        this.health = this.maxHealth;
+
+        // Sets spawn location with the random location array passed in
+        this.setPosition(locationArray[0], locationArray[1]);
+
+        // Set to active & visible
+        this.setActive(true);
+        this.setVisible(true);
+
+        // Activate collisions
+        this.body.checkCollision.none = false;
+        this.body.onOverlap = true;
+
+        // Update health bar
+        this.updateHealthBar();
+        this.healthBar.setVisible(true);
+    }
+
+    // Method makes monster inactive and invisible when killed
+    makeInactive() {
+        this.setActive(false);
+        this.setVisible(false);
+        this.body.checkCollision.none = true;
+        this.body.onOverlap = false;
+        this.body.setVelocity(0);
+        this.healthBar.clear();
+        this.healthBar.setVisible(false);
+    }
+
+    // Method creates the Roman health bar
     createHealthBar() {
         this.healthBar = this.scene.add.graphics();
         this.updateHealthBar();
@@ -238,51 +317,12 @@ class Roman extends Phaser.Physics.Arcade.Sprite {
         );
     }
 
-    // Method prepares Roman for reactivation
-    makeActive(locationArray) {
-        // Set animation frame & direction to down
-        this.anims.stop();
-        this.anims.play("walkDown", true);
-        this.setFrame(18);
-        this.currentDirection = Direction.DOWN;
-        this.health = this.maxHealth;
-
-        // Sets spawn location with the random location array passed in
-        this.setPosition(locationArray[0], locationArray[1]);
-
-        // Set Roman to active & visible
-        this.setActive(true);
-        this.setVisible(true);
-
-        // Activate Roman collisions
-        this.body.checkCollision.none = false;
-        this.body.onOverlap = true;
-
-        // Update monster health bar
-        this.updateHealthBar();
-        this.healthBar.setVisible(true);
-    }
-
-    // Method makes monster inactive and invisible when killed
-    makeInactive() {
-        this.setActive(false);
-        this.setVisible(false);
-        this.body.checkCollision.none = true;
-        this.body.onOverlap = false;
-        this.body.setVelocity(0);
-
-        // Clear the health bar
-        this.healthBar.clear();
-
-        // Make the heath bar invisible
-        this.healthBar.setVisible(false);
-    }
-
     // Method generates movement frames for walking animations
     createWalkAnimations() {
         let rateOfFrames = 15;
         let repeatValue = -1;
 
+        // Basic Roman walk animations
         if (this.type === RomanTypes.BASIC) {
             this.anims.create({
                 key: "walkUp",
@@ -322,6 +362,7 @@ class Roman extends Phaser.Physics.Arcade.Sprite {
             });
         }
 
+        // Commander Roman walk animations
         else if (this.type === RomanTypes.COMMANDER) {
             this.anims.create({
                 key: "walkUp",
@@ -367,6 +408,7 @@ class Roman extends Phaser.Physics.Arcade.Sprite {
         let rateOfFrames = 20;
         let repeatValue = 0;
 
+        // Basic Roman attack animations
         if (this.type === RomanTypes.BASIC) {
             this.anims.create({
                 key: "attackUp",
@@ -410,6 +452,7 @@ class Roman extends Phaser.Physics.Arcade.Sprite {
             });
         }
 
+        // Commander Roman attack animations
         else if (this.type === RomanTypes.COMMANDER) {
             this.anims.create({
                 key: "attackUp",

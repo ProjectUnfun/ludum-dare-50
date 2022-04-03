@@ -12,6 +12,9 @@ class BootScene extends Phaser.Scene {
 
         // Load the images
         this.loadImages();
+
+        // Load the audio
+        this.loadAudio();
     }
 
     // Load the assets for the tiled map
@@ -57,6 +60,28 @@ class BootScene extends Phaser.Scene {
     loadImages() {
         // Fighter class hitbox (never seen, just used for physics body)
         this.load.image("playerHitbox", "assets/images/player/hitboxImage.png");
+    }
+
+    // Method loads in the game audio
+    loadAudio() {
+        // Basic Roman sounds
+        this.load.audio("basicGrunt", ["assets/audio/basicGrunt.wav"]);
+        this.load.audio("basicDeath", ["assets/audio/basicDeath.wav"]);
+        this.load.audio("basicAttack", ["assets/audio/basicAttack.wav"]);
+
+        // Commander Roman sounds
+        this.load.audio("commanderGrunt", ["assets/audio/commanderGrunt.mp3"]);
+        this.load.audio("commanderDeath", ["assets/audio/commmanderDeath.mp3"]);
+        this.load.audio("commanderAttack", ["assets/audio/commanderAttack.wav"]);
+
+        // Player sounds
+        this.load.audio("playerGrunt", ["assets/audio/playerGrunt.wav"]);
+        this.load.audio("playerDeath", ["assets/audio/playerDeath.wav"]);
+        this.load.audio("playerAttack", ["assets/audio/playerAttack.wav"]);
+
+        // Attacks hitting target sounds
+        this.load.audio("playerHit", ["assets/audio/playerHit.wav"]);
+        this.load.audio("enemyHit", ["assets/audio/enemyHit.wav"]);
     }
 
     // Start the next scene

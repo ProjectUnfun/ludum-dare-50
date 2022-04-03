@@ -46,8 +46,8 @@ class GameScene extends Phaser.Scene {
 
     create() {
         // Track number of enemies
-        this.numberOfRomans = 20;
-        this.moreRomans = 10;
+        this.numberOfRomans = 10;
+        this.moreRomans = 5;
 
         // Create the input keys
         this.createInputCursors();
@@ -67,17 +67,20 @@ class GameScene extends Phaser.Scene {
         // Add collisions with the map
         this.addCollisions();
 
-        // TEMP CODE FOR COORDINATE FINDING
-        this.returnKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
-        this.returnKey.on("down", event => {
-            console.log(`Player X: ${this.player.x}`);
-            console.log(`Player Y: ${this.player.y}`);
-        });
+        // Create audio
+        this.createAudio();
     }
 
     update() {
         // Call the player object update method
         this.player.update(this.cursors);
+
+        // If Romans numbers are depleted, spawn more
+        if (this.numberOfRomans < 6) {
+            this.moreRomans += 5;
+            this.spawnRomans(this.moreRomans);
+            this.numberOfRomans += this.moreRomans;
+        }
     }
 
     // Method creates the game input using Phaser method
@@ -175,6 +178,61 @@ class GameScene extends Phaser.Scene {
         // Romans attacking player overlap event
         this.physics.add.overlap(this.player, this.romans, (player, roman) => {
             roman.markAsAttacking();
+        });
+    }
+
+    // Method creates the audio clips
+    createAudio() {
+        // Basic Roman audio
+        this.basicDeathAudio = this.sound.add("basicDeath", {
+            loop: false,
+            volume: 1.1,
+        });
+        this.basicGruntAudio = this.sound.add("basicGrunt", {
+            loop: false,
+            volume: 3.3,
+        });
+        this.basicAttackAudio = this.sound.add("basicAttack", {
+            loop: false,
+            volume: 1.1,
+        });
+
+        // Commander Roman audio
+        this.commanderDeathAudio = this.sound.add("commanderDeath", {
+            loop: false,
+            volume: 1.1,
+        });
+        this.commanderGruntAudio = this.sound.add("commanderGrunt", {
+            loop: false,
+            volume: 2.3,
+        });
+        this.commanderAttackAudio = this.sound.add("commanderAttack", {
+            loop: false,
+            volume: 2.7,
+        });
+
+        // Player audio
+        this.playerDeathAudio = this.sound.add("playerDeath", {
+            loop: false,
+            volume: 1.1,
+        });
+        this.playerGruntAudio = this.sound.add("playerGrunt", {
+            loop: false,
+            volume: 1.3,
+        });
+        this.playerAttackAudio = this.sound.add("playerAttack", {
+            loop: false,
+            volume: 1.1,
+        });
+
+        // Attacks hitting target audio
+        this.playerHitAudio = this.sound.add("playerHit", {
+            loop: false,
+            volume: 1.3,
+        });
+        this.enemyHitAudio = this.sound.add("enemyHit", {
+            loop: false,
+            volume: 1.8,
         });
     }
 }
