@@ -54,8 +54,8 @@ class GamePlayer extends Phaser.Physics.Arcade.Sprite {
         this.body.setOffset(16, 30);
 
         // Config health
-        this.health = 15;
-        this.maxHealth = 15;
+        this.health = 7;
+        this.maxHealth = 7;
 
         // Config attack value
         this.attackValue = 3;

@@ -95,6 +95,13 @@ class BootScene extends Phaser.Scene {
         // Attacks hitting target sounds
         this.load.audio("playerHit", ["assets/audio/playerHit.wav"]);
         this.load.audio("enemyHit", ["assets/audio/enemyHit.wav"]);
+
+        // Ambience sounds
+        this.load.audio("birdSong", ["assets/audio/birdAmbience.wav"]);
+        this.load.audio("waterSong", ["assets/audio/stream1.wav"]);
+
+        // Title music
+        this.load.audio("titleSong", ["assets/audio/battle-theme.wav"]);
     }
 
     // Start the next scene

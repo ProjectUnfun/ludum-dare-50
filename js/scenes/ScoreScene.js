@@ -24,7 +24,7 @@ class ScoreScene extends Phaser.Scene {
         });
 
         // Create mobs text
-        this.timeText = this.add.text(200, 5, "Time: 0", {
+        this.timeText = this.add.text(220, 5, "Time: 0", {
             fontSize: "36px",
             fill: "#fff",
             fontFamily: "MacedoniaOld",
@@ -35,7 +35,7 @@ class ScoreScene extends Phaser.Scene {
         this.killsIcon.setScale(1.2);
 
         // Create mobs icon
-        this.mobsIcon = this.add.image(185, 23, "hourglass");
+        this.timeIcon = this.add.image(205, 23, "hourglass");
     }
 
     // Method creates the event listener for counter updates

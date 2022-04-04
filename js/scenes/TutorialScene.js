@@ -9,13 +9,6 @@ class TutorialScene extends Phaser.Scene {
         this.backgroundImage.setOrigin(0);
         this.backgroundImage.setDisplaySize(800, 600);
 
-        // Display Title Text
-        this.gameName = this.add.text(395, 80, "Romans on the Rhine", {
-            color: "#DFDFDF ",
-            fontSize: 108,
-            fontFamily: "MacedoniaOld",
-        }).setOrigin(0.5);
-
         // Display instruction text
         this.message = this.add.text(395, 300, "Arrow keys move your character\nSpace bar swings your axe\nKilling Romans restores your health", {
             color: "#DFDFDF",
@@ -24,9 +17,9 @@ class TutorialScene extends Phaser.Scene {
         }).setOrigin(0.5);
 
         // Display instruction text
-        this.returnMessage = this.add.text(395, 580, "Press Space to Return to the Title Screen", {
+        this.returnMessage = this.add.text(395, 25, "Press Space to Return to the Title Screen", {
             color: "yellow",
-            fontSize: 24,
+            fontSize: 36,
             fontFamily: "Arial",
             fontStyle: "bold",
         }).setOrigin(0.5);
@@ -36,6 +29,7 @@ class TutorialScene extends Phaser.Scene {
 
         // When the space key is pressed and something has been input, set the name
         this.spaceKey.on("down", event => {
+            this.scene.stop("Tutorial");
             this.scene.start("Title");
         });
     }

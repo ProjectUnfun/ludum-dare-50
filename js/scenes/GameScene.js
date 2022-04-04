@@ -80,6 +80,9 @@ class GameScene extends Phaser.Scene {
         // Check player death
         if (this.player.health < 1) {
             this.scene.stop("Score");
+            this.scene.stop("Game");
+            this.birdSongAudio.stop();
+            this.waterSongAudio.stop();
             this.scene.start("End", { killCount: this.player.killCount, timeAlive: this.player.timeAlive });
         }
 
@@ -201,7 +204,7 @@ class GameScene extends Phaser.Scene {
         });
         this.basicGruntAudio = this.sound.add("basicGrunt", {
             loop: false,
-            volume: 3.3,
+            volume: 3.8,
         });
         this.basicAttackAudio = this.sound.add("basicAttack", {
             loop: false,
@@ -215,7 +218,7 @@ class GameScene extends Phaser.Scene {
         });
         this.commanderGruntAudio = this.sound.add("commanderGrunt", {
             loop: false,
-            volume: 3.3,
+            volume: 3.9,
         });
         this.commanderAttackAudio = this.sound.add("commanderAttack", {
             loop: false,
@@ -243,7 +246,20 @@ class GameScene extends Phaser.Scene {
         });
         this.enemyHitAudio = this.sound.add("enemyHit", {
             loop: false,
-            volume: 1.8,
+            volume: 1.3,
         });
+
+        // Ambient sounds
+        this.birdSongAudio = this.sound.add("birdSong", {
+            loop: true,
+            volume: 1.3,
+        });
+        this.waterSongAudio = this.sound.add("waterSong", {
+            loop: true,
+            volume: 0.8,
+        });
+
+        this.birdSongAudio.play();
+        this.waterSongAudio.play();
     }
 }
