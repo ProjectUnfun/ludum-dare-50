@@ -257,6 +257,12 @@ class Roman extends Phaser.Physics.Arcade.Sprite {
             // Increment player kill counter
             this.scene.player.killCount++;
 
+            // Emit event for updating UI counters
+            this.scene.events.emit(
+                "updateKills",
+                this.scene.player.killCount
+            );
+
             // Play death audio & recover player health
             if (this.type === RomanTypes.BASIC) {
                 this.scene.basicDeathAudio.play();

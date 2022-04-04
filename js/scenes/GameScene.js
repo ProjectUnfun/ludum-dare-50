@@ -44,6 +44,11 @@ class GameScene extends Phaser.Scene {
         super("Game");
     }
 
+    init() {
+        // Run the Score scene in parallel with the game scene
+        this.scene.launch("Score");
+    }
+
     create() {
         // Track number of enemies
         this.numberOfRomans = 10;
@@ -74,6 +79,7 @@ class GameScene extends Phaser.Scene {
     update() {
         // Check player death
         if (this.player.health < 1) {
+            this.scene.stop("Score");
             this.scene.start("End", { killCount: this.player.killCount, timeAlive: this.player.timeAlive });
         }
 

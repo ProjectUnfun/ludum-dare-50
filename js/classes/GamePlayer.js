@@ -29,8 +29,8 @@ class GamePlayer extends Phaser.Physics.Arcade.Sprite {
         // Add player object to scene
         this.scene.add.existing(this);
 
-        // TEMP CODE Until timer is implemented
-        this.timeAlive = 90;
+        // Config player timer
+        this.configTimer();
     }
 
     update(cursors) {
@@ -252,6 +252,28 @@ class GamePlayer extends Phaser.Physics.Arcade.Sprite {
             this.y - 30,
             (40 * this.health) / this.maxHealth,
             5
+        );
+    }
+
+    // Method configs the player life timer
+    configTimer() {
+        this.timerEvent = this.scene.time.addEvent({
+            delay: 1000,
+            callback: this.handleTime,
+            callbackScope: this,
+            loop: true,
+        });
+        this.timeAlive = 0;
+    }
+
+    // Method handles incrementing player life timer
+    handleTime() {
+        this.timeAlive++;
+
+        // Emit event for updating UI counters
+        this.scene.events.emit(
+            "updateTime",
+            this.timeAlive,
         );
     }
 
