@@ -64,9 +64,6 @@ class BootScene extends Phaser.Scene {
         // Title screen background image
         this.load.image("titleBG", "assets/images/backgrounds/TitleBG.png");
 
-        // Tutorial scene background image
-        this.load.image("tutorialBG", "assets/images/backgrounds/TutorialBG.png");
-
         // Game over scene background image
         this.load.image("endBG", "assets/images/backgrounds/EndBG.png");
 

@@ -31,21 +31,20 @@ class TitleScene extends Phaser.Scene {
         }).setOrigin(0.5);
 
         // Display instruction text
-        this.message = this.add.text(395, 490, "   Press Enter to Play\nPress Space for Tutorial", {
+        this.message = this.add.text(395, 380, "Press Enter to Play", {
             color: "#DFDFDF",
             fontSize: 64,
             fontFamily: "MacedoniaOld",
         }).setOrigin(0.5);
 
-        // Display instruction text effects
-        this.enterEffect = this.add.text(364, 455, "Enter", {
-            color: "#FF0000",
-            fontSize: 64,
-            fontFamily: "MacedoniaOld",
+        this.message = this.add.text(235, 560, "Arrow keys move your character\nSpace bar swings your axe\nKilling Romans restores your health", {
+            color: "#DFDFDF",
+            fontSize: 24,
+            fontFamily: "Monospace",
         }).setOrigin(0.5);
 
         // Display instruction text effects
-        this.spaceEffect = this.add.text(324, 525, "Space", {
+        this.enterEffect = this.add.text(374, 380, "Enter", {
             color: "#FF0000",
             fontSize: 64,
             fontFamily: "MacedoniaOld",
@@ -73,16 +72,6 @@ class TitleScene extends Phaser.Scene {
             this.scene.stop("Title");
             this.titleMusicAudio.stop();
             this.scene.start("Intro");
-        });
-
-        // Track when space key is pressed
-        this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-
-        // When space key is pressed start tutorial
-        this.spaceKey.on("down", event => {
-            this.scene.stop("Title");
-            this.titleMusicAudio.stop();
-            this.scene.start("Tutorial");
         });
     }
 }
