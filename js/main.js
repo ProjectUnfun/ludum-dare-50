@@ -7,6 +7,7 @@ var config = {
         BootScene,
         TitleScene,
         TutorialScene,
+        IntroScene,
         GameScene,
         ScoreScene,
         EndScene,

@@ -72,7 +72,7 @@ class TitleScene extends Phaser.Scene {
         this.returnKey.on("down", event => {
             this.scene.stop("Title");
             this.titleMusicAudio.stop();
-            this.scene.start("Game");
+            this.scene.start("Intro");
         });
 
         // Track when space key is pressed

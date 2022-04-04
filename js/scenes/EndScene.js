@@ -6,6 +6,10 @@ class EndScene extends Phaser.Scene {
     init(data) {
         this.kills = data.killCount;
         this.timeAlive = data.timeAlive;
+
+        // // TEST CODE
+        // this.kills = 5;
+        // this.timeAlive = 40;
     }
 
     create() {
@@ -22,7 +26,7 @@ class EndScene extends Phaser.Scene {
         }).setOrigin(0.5);
 
         // Display credits text
-        this.creditsText = this.add.text(400, 100, "Stephen Challener (Redshrike), Johannes Sjölund (wulax),\nMatthew Krohn (makrohn), bluecarrot16, DCSS authors,\nMichael Whitlock (bigbeargames), David Conway Jr (JaidynReiman),\nJoe White, Nila122, Benjamin K. Smith (BenCreating),\nSander Frenken (castelonia), Pierre Vigier (pvigier),\nInboxninja, DarkwallLKE, Tuomo Untinen (reemax), XOR,\nCasper Nilsson, Daniel Eddeland, Johann CHARLOT,\nSkyler Robert Colladay, Lanea Zimmerman, Charles Sanchez,\nManuel Riecke, Daniel Armstrong, edermuniz", {
+        this.creditsText = this.add.text(400, 100, "Stephen Challener (Redshrike), Johannes Sjölund (wulax),\nMatthew Krohn (makrohn), bluecarrot16, DCSS authors,\nMichael Whitlock (bigbeargames), David Conway Jr (JaidynReiman),\nJoe White, Nila122, Benjamin K. Smith (BenCreating),\nSander Frenken (castelonia), Pierre Vigier (pvigier),\nInboxninja, DarkwallLKE, Tuomo Untinen (reemax), XOR,\nCasper Nilsson, Daniel Eddeland, Johann CHARLOT,\nSkyler Robert Colladay, Lanea Zimmerman, Charles Sanchez,\nManuel Riecke, Daniel Armstrong, edermuniz, RodrixAP, Jubilee", {
             color: "#DFDFDF",
             fontSize: 16,
             fontStyle: "bold"
@@ -38,15 +42,15 @@ class EndScene extends Phaser.Scene {
         // Display kills text
         this.killsText = this.add.text(200, 460, `Kills: ${this.kills}`, {
             color: "#FF2200",
-            fontSize: 96,
-            fontFamily: "Impact",
+            fontSize: 72,
+            fontFamily: "Arial",
         }).setOrigin(0.5);
 
         // Display time text
-        this.timeText = this.add.text(570, 460, `Time: ${this.timeAlive}`, {
+        this.timeText = this.add.text(560, 460, `Time: ${this.timeAlive}`, {
             color: "#FF2200",
-            fontSize: 96,
-            fontFamily: "Impact",
+            fontSize: 72,
+            fontFamily: "Arial",
         }).setOrigin(0.5);
 
         // Display instruction text

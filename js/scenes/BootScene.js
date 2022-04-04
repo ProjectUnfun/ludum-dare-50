@@ -73,6 +73,11 @@ class BootScene extends Phaser.Scene {
         // HUD images
         this.load.image("axeIcon", "assets/images/hud/axeIcon.png");
         this.load.image("hourglass", "assets/images/hud/Hourglass.png");
+
+        // Intro scene images
+        this.load.image("burningVillage", "assets/images/backgrounds/BurningVillage.png");
+        this.load.image("graveyard", "assets/images/backgrounds/Graveyard.png");
+        this.load.image("mountains", "assets/images/backgrounds/MountainBG.png");
     }
 
     // Method loads in the game audio
